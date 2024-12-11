@@ -2,7 +2,9 @@
 
 Our goal for this project is:
 1. Take the frontend and backend of an existing project and host it using Kubernetes.
-2. Monitor the application.
+2. Monitor the application. Specifically, we plan to use:
+   - Kubernetes monitoring
+   - Service monitoring
 3. If time permits, we might try to add CI/CD pipelines to some parts of the project (all three components require a build step and both frontend and backend need to be hosted somewhere).
 
 Our cloud service provider will be Google Cloud and we will be using Dynatrace for the application monitoring part.
@@ -13,10 +15,11 @@ Additionally we will try to simulate stress conditions by artificially degrading
   - Set up Kubernetes on Google Cloud
 - Tobias Müller (K12209522)
   - Containerize/host frontend
-  - Set up Dynatrace and monitor Project
 - Jonas Karg (K12213152)
   - Containerize/host backend
-  - Simulate system degradation/high load
+
+Monitoring will be done together (six-eyes principle), because the setup can be a bit more involved.
+Also, the synthetic traffic generation is hard to split up three-ways, so we will try to do that part as a team as well.
 
 ## Milestones
 - Set up Kubernetes on Google Cloud
