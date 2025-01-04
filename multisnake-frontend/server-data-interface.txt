@@ -1,0 +1,23 @@
+- game id
+       64 chars
+
+- user registered (name, color)
+        "registered:name,ff22bb"
+
+- user is ready (name)
+        "ready:name"
+
+- user disconnected (name)
+        "disconnected:name"
+
+- joystick data
+        "name:0.7,0.6;name:0.34,0.3;..."
+        
+- player has died
+        "died:name"
+
+- player score/segment count
+        "color:3;color:15;..."
+
+- game over
+        "gameover"

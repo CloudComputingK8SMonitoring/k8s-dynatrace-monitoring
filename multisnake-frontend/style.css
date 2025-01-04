@@ -1,0 +1,24 @@
+:root {
+    /* This is used to scale to a percentage
+       of the shortest side of the screen */
+    --wh-min: min(1vw, 1vh);
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+#qr {
+    image-rendering: pixelated;
+    width: calc(var(--wh-min) * 40);
+    border-radius: calc(var(--wh-min) * 2);
+}

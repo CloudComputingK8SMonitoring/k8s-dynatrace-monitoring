@@ -1,0 +1,23 @@
+{
+  "name": "multisnake-frontend-three",
+  "version": "1.0.0",
+  "main": "static/scripts/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonas Karg",
+  "license": "UNLICENSED",
+  "description": "",
+  "dependencies": {
+    "qrcode": "^1.5.3",
+    "three": "^0.151.2"
+  },
+  "devDependencies": {
+    "@types/three": "^0.150.1",
+    "terser": "^5.37.0",
+    "vite": "^4.2.1",
+    "vite-plugin-glsl": "^1.1.2"
+  }
+}
