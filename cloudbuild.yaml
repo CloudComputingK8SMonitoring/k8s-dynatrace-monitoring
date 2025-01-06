@@ -37,3 +37,6 @@ steps:
 images:
 - 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA'
 - 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/server:$SHORT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
