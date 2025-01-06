@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multisnake-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "multisnake-ip"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: multisnake-frontend
+            port:
+              number: 80
+      - path: /server
+        pathType: Prefix
+        backend:
+          service:
+            name: multisnake-server
+            port:
+              number: 8000
+      - path: /ws
+        pathType: Prefix
+        backend:
+          service:
+            name: multisnake-server
+            port:
+              number: 8001
