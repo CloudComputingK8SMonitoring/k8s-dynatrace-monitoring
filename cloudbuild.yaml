@@ -21,8 +21,8 @@ steps:
     - 'deployment/multisnake-frontend'
     - 'multisnake-frontend=europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA'
   env:
-    - 'CLOUDSDK_COMPUTE_ZONE=your-zone'
-    - 'CLOUDSDK_CONTAINER_CLUSTER=your-cluster'
+    - 'CLOUDSDK_COMPUTE_ZONE=europe-west1'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
 
 - name: 'gcr.io/cloud-builders/kubectl'
   args:
@@ -31,8 +31,8 @@ steps:
     - 'deployment/multisnake-server'
     - 'multisnake-server=europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/server:$SHORT_SHA'
   env:
-    - 'CLOUDSDK_COMPUTE_ZONE=your-zone'
-    - 'CLOUDSDK_CONTAINER_CLUSTER=your-cluster'
+    - 'CLOUDSDK_COMPUTE_ZONE=europe-west1'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
 
 images:
 - 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA'
