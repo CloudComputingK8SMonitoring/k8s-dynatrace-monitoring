@@ -6,8 +6,7 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: "multisnake-ip"
 spec:
   rules:
-  - host: multisnake.net
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -16,17 +15,14 @@ spec:
             name: multisnake-frontend
             port:
               number: 80
-  - host: api.multisnake.net
-    http:
-      paths:
-      - path: /
+      - path: /server
         pathType: Prefix
         backend:
           service:
             name: multisnake-server
             port:
               number: 8000
-      - path: /controller
+      - path: /ws
         pathType: Prefix
         backend:
           service:
