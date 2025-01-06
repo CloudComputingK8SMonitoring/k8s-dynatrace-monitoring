@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: multisnake-frontend
+      app: multisnake
   template:
     metadata:
       labels:
-        app: multisnake-frontend
+        app: multisnake
     spec:
       containers:
       - name: multisnake-frontend
@@ -24,15 +24,41 @@ spec:
           limits:
             cpu: "200m"
             memory: "256Mi"
+      - name: multisnake-server
+        image: europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/multisnake-server
+        ports:
+        - containerPort: 8000
+        - containerPort: 8001
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: multisnake-frontend
 spec:
-  type: LoadBalancer  # or ClusterIP if you'll use Ingress
+  type: LoadBalancer
   ports:
   - port: 80
     targetPort: 80
   selector:
-    app: multisnake-frontend
+    app: multisnake
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multisnake-server
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8000
+    targetPort: 8000
+  - port: 8001
+    targetPort: 8001
+  selector:
+    app: multisnake
