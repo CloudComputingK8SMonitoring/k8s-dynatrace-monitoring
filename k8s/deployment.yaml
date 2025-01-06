@@ -58,7 +58,9 @@ spec:
   ports:
   - port: 8000
     targetPort: 8000
+    name: frontend-port
   - port: 8001
     targetPort: 8001
+    name: controller-port
   selector:
     app: multisnake
