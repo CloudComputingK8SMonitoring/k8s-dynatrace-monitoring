@@ -1,0 +1,39 @@
+steps:
+# Build frontend
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA', './multisnake-frontend']
+
+# Build backend
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/server:$SHORT_SHA', './multisnake-server']
+
+# Push images
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/server:$SHORT_SHA']
+
+# Deploy to GKE
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+    - 'set'
+    - 'image'
+    - 'deployment/multisnake-frontend'
+    - 'multisnake-frontend=europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA'
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=your-zone'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=your-cluster'
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  args:
+    - 'set'
+    - 'image'
+    - 'deployment/multisnake-server'
+    - 'multisnake-server=europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/server:$SHORT_SHA'
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=your-zone'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=your-cluster'
+
+images:
+- 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA'
+- 'europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/server:$SHORT_SHA'
