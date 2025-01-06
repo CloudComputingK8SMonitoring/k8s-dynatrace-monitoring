@@ -18,8 +18,8 @@ steps:
   args:
     - 'set'
     - 'image'
-    - 'deployment/multisnake'
-    - 'multisnake=europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA'
+    - 'deployment/multisnake-frontend'
+    - 'multisnake-frontend=europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA'
   env:
     - 'CLOUDSDK_COMPUTE_ZONE=europe-west1'
     - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
