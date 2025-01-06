@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multisnake-ingress
+spec:
+  rules:
+  - host: multisnake.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: multisnake-frontend
+            port:
+              number: 80
+  - host: api.multisnake.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: multisnake-server
+            port:
+              number: 8000
+      - path: /controller
+        pathType: Prefix
+        backend:
+          service:
+            name: multisnake-server
+            port:
+              number: 8001
