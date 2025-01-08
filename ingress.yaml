@@ -4,28 +4,29 @@ metadata:
   name: multisnake-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "multisnake-ip"
+    kubernetes.io/ingress.class: "gce"
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: multisnake-frontend
-            port:
-              number: 80
-      - path: /server
-        pathType: Prefix
-        backend:
-          service:
-            name: multisnake-server
-            port:
-              number: 8000
-      - path: /ws
-        pathType: Prefix
-        backend:
-          service:
-            name: multisnake-server
-            port:
-              number: 8001
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: multisnake-frontend
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: multisnake-server
+                port:
+                  number: 8000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: multisnake-server
+                port:
+                  number: 8001
