@@ -1,7 +1,7 @@
 
 const SOCKET_PORT = 8000;
 
-export const SOCKET_SERVER = `ws://34.54.198.175:${SOCKET_PORT}`;
+export const SOCKET_SERVER = `ws://34.149.22.202:${SOCKET_PORT}`;
 export const SOCKET_SERVER_RECONNECT_DELAY = 1000;
 export const SOCKET_PLAYER_REGISTERED_PREFIX = 'registered';
 export const SOCKET_PLAYER_DISCONNECTED_PREFIX = 'disconnected';
