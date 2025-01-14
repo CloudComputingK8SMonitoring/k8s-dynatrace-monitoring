@@ -82,4 +82,35 @@ kubectl apply -f deployment.yaml
 
 ### Configuring Ingress
 
+TODO: add text
+
+### Install Dynatrace Monitoring in Google Cloud
+
+1. Install Package Manager Helm
+    ```bash
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+    ```
+2. Create Google Cloud permission
+    ```bash
+    gcloud iam roles create dynatrace_monitor.helm_deployment --project=<your_project_ID> --file=dynatrace-gcp-monitor-helm-deployment-role.yaml
+    ```
+3. Install OneAgent
+    1. Choose `GKE Autopilot` as distribution
+    2. Configure cluster
+        - Cluster name: `autopilot-cluster-1`
+    3. Install Dynatrace Operator:
+        ```bash
+        helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator \
+        --set "imageRef.repository=gcr.io/dynatrace-marketplace-prod/dynatrace-operator" \
+        --create-namespace \
+        --namespace dynatrace \
+        --atomic
+        ```
+
+        ```bash
+        kubectl apply -f dynakube.yaml
+        ```
+
+
+
 
