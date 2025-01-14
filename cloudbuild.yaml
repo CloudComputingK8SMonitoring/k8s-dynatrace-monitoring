@@ -18,7 +18,7 @@ steps:
   args:
     - 'set'
     - 'image'
-    - 'deployment/multisnake'
+    - 'deployment/multisnake-frontend'
     - 'multisnake-frontend=europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/frontend:$SHORT_SHA'
   env:
     - 'CLOUDSDK_COMPUTE_ZONE=europe-west1'
@@ -27,7 +27,7 @@ steps:
   args:
     - 'set'
     - 'image'
-    - 'deployment/multisnake'
+    - 'deployment/multisnake-server'
     - 'multisnake-server=europe-west1-docker.pkg.dev/cloudcomputing-446812/multisnake/server:$SHORT_SHA'
   env:
     - 'CLOUDSDK_COMPUTE_ZONE=europe-west1'
