@@ -5,6 +5,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "multisnake-ip"
     kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.allow-http: "true"
+    kubernetes.io/ingress.websocket-backend: "true"
+    kubernetes.io/ingress.timeout-sec: "3600"
 spec:
   rules:
   - http:
@@ -16,30 +19,14 @@ spec:
             name: multisnake-frontend
             port:
               number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: multisnake-server-ingress
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: "multisnake-ip-server"
-    kubernetes.io/ingress.class: "gce"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
-    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
-    nginx.ingress.kubernetes.io/connection-proxy-header: "upgrade"
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
+      - path: /ws/game
         pathType: Prefix
         backend:
           service:
             name: multisnake-server
             port:
               number: 8000
-      - path: /
+      - path: /ws/controller
         pathType: Prefix
         backend:
           service:
