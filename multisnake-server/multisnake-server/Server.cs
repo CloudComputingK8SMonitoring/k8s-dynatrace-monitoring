@@ -21,7 +21,7 @@ namespace multisnake_server
         {
             Console.WriteLine("Listening for frontends...");
             HttpListener listener = new HttpListener();
-            listener.Prefixes.Add("http://*:8000/ws/game");
+            listener.Prefixes.Add("http://*:8000/");
             listener.Start();
 
 
@@ -46,15 +46,24 @@ namespace multisnake_server
         /// <param name="context">The HTTP listener context.</param>
         private async void processWebSocketRequest(HttpListenerContext context)
         {
-            HttpListenerWebSocketContext webSocketContext = await context.AcceptWebSocketAsync(null);
-            WebSocket socket = webSocketContext.WebSocket;
-            FrontendHandler frontendController = new FrontendHandler(socket, generateID());
-            lock (frontends)
+            try 
             {
-                frontends.Add(frontendController);
+                HttpListenerWebSocketContext webSocketContext = await context.AcceptWebSocketAsync(null);
+                WebSocket socket = webSocketContext.WebSocket;
+                FrontendHandler frontendController = new FrontendHandler(socket, generateID());
+                lock (frontends)
+                {
+                    frontends.Add(frontendController);
+                }
+                frontendController.OnDisconnect += FrontendController_OnDisconnect;
+                frontendController.sendID();
             }
-            frontendController.OnDisconnect += FrontendController_OnDisconnect;
-            frontendController.sendID();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"WebSocket connection failed: {ex.Message}");
+                context.Response.StatusCode = 500;
+                context.Response.Close();
+            }
         }
 
         /// <summary>
