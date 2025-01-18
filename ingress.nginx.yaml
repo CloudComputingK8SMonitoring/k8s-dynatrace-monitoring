@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multisnake-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+    # WebSocket support
+    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
+    nginx.ingress.kubernetes.io/websocket-services: "multisnake-server"
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: multisnake-frontend
+                port:
+                  number: 80
+          - path: /ws/game
+            pathType: Prefix
+            backend:
+              service:
+                name: multisnake-server
+                port:
+                  number: 8000
+          - path: /ws/controller
+            pathType: Prefix
+            backend:
+              service:
+                name: multisnake-server
+                port:
+                  number: 8001
