@@ -110,7 +110,3 @@ TODO: add text
         ```bash
         kubectl apply -f dynakube.yaml
         ```
-
-
-
-
