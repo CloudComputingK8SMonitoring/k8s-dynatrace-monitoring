@@ -21,7 +21,7 @@ namespace multisnake_server
         {
             Console.WriteLine("Listening for frontends...");
             HttpListener listener = new HttpListener();
-            listener.Prefixes.Add("http://*:8000/");
+            listener.Prefixes.Add("http://*:8000/ws/game");
             listener.Start();
 
 
